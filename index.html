@@ -1,59 +1,166 @@
+
 <html>
 <meta name="viewport" content="width=device-width">
 
 <style>
-body{font-family:Arial;background:#faf9f7;color:#17304f;margin:25px}
-div{padding:15px;margin:8px 0;border-radius:16px;background:#e8f4ef}
-button,input,select{width:100%;padding:14px;margin:6px 0;border:0;border-radius:12px;font-size:16px}
-button{background:#17345e;color:white}
-.f{display:none}
+body {
+    font-family: -apple-system;
+    background: #faf9f7;
+    color: #17304f;
+    margin: 22px;
+}
+
+h1 {
+    font-family: Georgia;
+}
+
+.hero, .c {
+    padding: 17px;
+    border-radius: 18px;
+    margin: 8px 0;
+}
+
+.hero {
+    background: #dff5eb;
+}
+
+.g {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.c {
+    background: #eef1f5;
+}
+
+.c b {
+    display: block;
+    margin-top: 6px;
+}
+
+button, input, select {
+    width: 100%;
+    padding: 14px;
+    margin-top: 9px;
+    border: 0;
+    border-radius: 13px;
+    font-size: 16px;
+}
+
+button {
+    background: #17345e;
+    color: white;
+}
+
+.f {
+    display: none;
+}
 </style>
 
+<div id="h">
+
+<small>Привет, Динара 👋</small>
 <h1>My Wealth</h1>
 
-<div>💵 Kaspi <h2 id=b></h2></div>
+<div class="hero">
+    Чистый капитал
+    <h2 id="net">0 ₸</h2>
+</div>
+
+<div class="g">
+
+    <div class="c">
+        💵 Kaspi
+        <b id="b">0 ₸</b>
+    </div>
+
+    <div class="c">
+        🏦 Halyk
+        <b>0 ₸</b>
+    </div>
+
+    <div class="c">
+        📈 Инвестиции
+        <b>0 ₸</b>
+    </div>
+
+    <div class="c">
+        🏠 Недвижимость
+        <b>0 ₸</b>
+    </div>
+
+    <div class="c">
+        💳 Долги
+        <b>0 ₸</b>
+    </div>
+
+    <div class="c">
+        💵 Наличные
+        <b>0 ₸</b>
+    </div>
+
+</div>
 
 <button onclick="h.style.display='none';f.style.display='block'">
-+ Добавить операцию
+    + Добавить операцию
 </button>
 
-<section id=h></section>
+</div>
 
-<section id=f class=f>
+<div id="f" class="f">
+
 <h2>Новая операция</h2>
 
-<select id=t>
-<option>Расход</option>
-<option>Доход</option>
+<select id="t">
+    <option>Доход</option>
+    <option>Расход</option>
 </select>
 
-<input id=a type=number placeholder="Сумма ₸">
+<input id="a" type="number" placeholder="Сумма ₸">
 
 <select>
-<option>Продукты</option>
-<option>Транспорт</option>
-<option>Дом</option>
+    <option>Kaspi</option>
 </select>
 
 <button onclick="save()">Сохранить</button>
 
-<button onclick="f.style.display='none'">
-← Назад
-</button>
-</section>
+<button onclick="back()">← Назад</button>
+
+</div>
 
 <script>
-let x=+localStorage.k||1000000;
-b.innerText=x.toLocaleString()+' ₸';
+let x = +localStorage.k || 0;
 
-function save(){
-let n=+a.value;
-if(n<=0)return alert('Введите сумму');
-x=t.value=='Расход'?x-n:x+n;
-localStorage.k=x;
-b.innerText=x.toLocaleString()+' ₸';
-f.style.display='none';
-alert('Операция сохранена ✓')
+function show() {
+    b.innerText = x.toLocaleString() + ' ₸';
+    net.innerText = x.toLocaleString() + ' ₸';
+}
+
+show();
+
+function save() {
+    let n = +a.value;
+
+    if (n <= 0)
+        return alert('Введите сумму');
+
+    x = t.value == 'Расход' ? x - n : x + n;
+
+    localStorage.k = x;
+
+    show();
+
+    a.value = '';
+
+    back();
+}
+
+function back() {
+    f.style.display = 'none';
+    h.style.display = 'block';
 }
 </script>
+
 </html>
+
